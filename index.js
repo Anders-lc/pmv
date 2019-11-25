@@ -1,27 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // 根据温度求ps
   var airTemperatureElem = document.getElementById('airTemperature');
   var psValueElem = document.getElementById('psValue')
+  var humidityElem = document.getElementById('humidity');
+  var paValueElem = document.getElementById('paValue');
+
+  // 根据ps和湿度求人体周围水蒸气分压力pa
+  var calcPaValueCallback = function(event) {
+    var psValue = psValueElem.innerText;
+    if (!psValue) {
+      paValue.innerText = 'Error:请先输入温度求得ps值';
+      return;
+    }
+    if (event.target !== humidityElem && !humidityElem.value) {
+      paValue.innerText = 'Error:请输入相对湿度';
+      return;
+    }
+    var value = psValue * humidityElem.value / 1000;
+    paValueElem.innerText = value;
+  };
+
+  // 根据温度求ps
   airTemperatureElem.addEventListener('input', function() {
     var intValue = +this.value;
     var value = Math.exp(intValue * 17.26 / (273.3 + intValue)) * 610.6;
     psValueElem.innerText = value;
   });
 
-  // 根据ps和湿度求人体周围水蒸气分压力pa
-  var humidityElem = document.getElementById('humidity');
-  var paValueElem = document.getElementById('paValue');
-  humidityElem.addEventListener('input', function() {
-    var psValue = psValueElem.innerText;
-    if (!psValue) {
-      this.value = '';
-      paValue.innerText = 'Error:请先输入温度求得ps值';
-      airTemperature.focus();
-      return;
-    }
-    var value = psValue * this.value / 1000;
-    paValueElem.innerText = value;
-  });
+  airTemperatureElem.addEventListener('input', calcPaValueCallback);
+  humidityElem.addEventListener('input', calcPaValueCallback);
 
   var clothHeatResistanceElem = document.getElementById('clothHeatResistance');
   var fclValueElem = document.getElementById('fclValue');
@@ -99,15 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   var commonCheck = function (event) {
     if (!airTemperatureElem.value) {
-      airTemperatureElem.focus();
       return 'Error:请输入人体周围空气温度';
     }
     if (!clothHeatResistanceElem.value || !fclValueElem.innerText) {
-      clothHeatResistanceElem.focus();
       return 'Error:请输入服装热阻';
     }
     if (!hcValueElem.innerText || hcValueElem.innerText.indexOf('Error') !== -1) {
-      airVelocityElem.focus();
       return 'Error:请输入空气的相对流速，或检查其正确性，区间(0, 1.5)';
     }
     if (!metabolismRatioElem.value) {
@@ -120,6 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
       return 'Error:请输入平均辐射温度';
     }
   };
+  airTemperatureElem.addEventListener('input', calcTclValueCb);
+  humidityElem.addEventListener('input', calcTclValueCb);
+  clothHeatResistanceElem.addEventListener('input', calcTclValueCb);
+  airVelocityElem.addEventListener('input', calcTclValueCb);
   metabolismRatioElem.addEventListener('input', calcTclValueCb);
   mechanicalWorkElem.addEventListener('input', calcTclValueCb);
   averageRadiationTemperatureElem.addEventListener('input', calcTclValueCb);
