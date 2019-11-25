@@ -1,0 +1,61 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: rgba(57, 177, 164, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#pmvForm {
+  border: 1px solid rgba(255, 255, 255, .3);
+  padding: 1em;
+  width: 50%;
+  max-width: 680px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#pmvForm h2 {
+  font-weight: 100;
+  padding: 0;
+  margin: 0;
+}
+
+#pmvForm label {
+  font-size: 1.2em;
+  font-weight: 200;
+  padding-top: 12px;
+  display: block;
+}
+
+#pmvForm input {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 200;
+  padding: 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#pmvForm input[type=submit] {
+  background-color: hsl(8, 70%, 54%);
+  color: white;
+  margin-top: 20px;
+  padding: 10px;
+  border: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-size: 18px;
+}
+
+#pmvForm .textBottom {
+  vertical-align: text-bottom;
+  font-size: 12px;
+}

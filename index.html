@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PMV方程及热舒适指标的选取</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <form id="pmvForm">
+      <h2>PMV方程及热舒适指标的选取</h2>
+
+      <label for="airTemperature">人体周围空气温度t<span class="textBottom">a</span>(℃)</label>
+      <input placeholder="人体周围空气温度" id="airTemperature" type="number" />
+      <div>P<span class="textBottom">s</span>：<span id="psValue"></span></div>
+
+      <label for="humidity">相对湿度</label>
+      <input placeholder="相对湿度" id="humidity" type="number" />
+      <div>P<span class="textBottom">a</span>(人体周围水蒸气分压力kPa)：<span id="paValue"></span></div>
+
+      <label for="clothHeatResistance">服装热阻I<span class="textBottom">cl</span></label>
+      <input placeholder="服装热阻" id="clothHeatResistance" type="number" />
+      <div>f<span class="textBottom">cl</span>(穿衣人体与裸体表面积之比)：<span id="fclValue"></span></div>
+
+      <label for="airVelocity">空气的相对流速(m/s)</label>
+      <input placeholder="空气的相对流速" id="airVelocity" type="number" max="1.5" min="0" />
+      <div>h<span class="textBottom">c</span>(对流换热系数W/(m2 • K ))：<span id="hcValue"></span></div>
+
+      <label for="metabolismRatio">人体能量代谢率M(W/㎡)</label>
+      <input placeholder="人体能量代谢率" id="metabolismRatio" type="number" />
+      <label for="mechanicalWork">人体所做机械功W(W/㎡)</label>
+      <input placeholder="人体所做机械功" id="mechanicalWork" type="number" />
+      <label for="averageRadiationTemperature">平均辐射温度t<span class="textBottom">r</span>(℃)</label>
+      <input placeholder="平均辐射温度" id="averageRadiationTemperature" type="number" />
+      <div>穿衣人体外表面平均温度t<span class="textBottom">cl</span>：<span id="tclValue"></span></div>
+      <div style="margin-top: 16px;font-weight: bold;">预测平均评价PMV：<span id="pmvValue"></span></div>
+    </form>
+
+    <script src="index.js"></script>
+  </body>
+</html>
